@@ -1,0 +1,25 @@
+.bar-color {
+  width: 15px;
+  height: 2px;
+}
+
+.divColorContent{
+  width: 100%;
+  min-height: 500px;
+}
+
+.divColor{
+  width: 5px;
+  height: 5px;
+  float: left;
+}
+
+.finalColor{
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.colorContainer{
+  width: 127px;
+}
