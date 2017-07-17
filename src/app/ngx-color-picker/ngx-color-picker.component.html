@@ -1,4 +1,5 @@
-<div [style.display]="mostrar">
+<div (click)="open=!open" [style.background]="color" class="pick"></div>
+<div [hidden]="open">
   <canvas #canvas [width]="width" [height]="height" id="canvas_picker"></canvas>
   <div id="hex">HEX: <input [(ngModel)]="hex" type="text"/></div>
   <div id="rgb">RGB: <input [(ngModel)]="rgb" type="text"/></div>

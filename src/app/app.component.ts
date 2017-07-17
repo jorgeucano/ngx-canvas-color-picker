@@ -10,6 +10,7 @@ export class AppComponent {
 
   rgb;
   hex;
+  open = true;
 
   setHex(data: any) {
     this.hex = data;

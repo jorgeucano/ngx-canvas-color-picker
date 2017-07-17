@@ -3,14 +3,16 @@
 </h1>
 
 <ngx-canvas-color-picker
-  [width]="500"
-  [height]="500"
+  [width]="300"
+  [height]="300"
   [square]="false"
+  (close)="true"
+  [open]="open"
   (hexData)="setHex($event)"
   (rgbData)="setRGB($event)"
   >
 </ngx-canvas-color-picker>
 
-
+<br />
 RGB : {{rgb}} <br />
 HEX : {{hex}}

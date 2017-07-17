@@ -1,3 +1,8 @@
 canvas {
   cursor: crosshair;
 }
+
+.pick {
+  width: 10px;
+  height: 10px;
+}

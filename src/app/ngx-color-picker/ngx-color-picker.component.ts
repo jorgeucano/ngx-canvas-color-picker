@@ -1,4 +1,14 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChange
+} from '@angular/core';
 
 @Component({
   selector: 'ngx-canvas-color-picker',
@@ -7,11 +17,14 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, Output,
 })
 export class NgxColorPickerComponent implements OnInit {
 
-  rgb; hex;
+  rgb; hex; color;
 
   @Input() width: any = 400;
   @Input() height: any = 400;
   @Input() square: boolean = true;
+  @Input() close: boolean = true;
+  @Input() open: boolean = true;
+
 
   @Output() hexData = new EventEmitter<string>();
   @Output() rgbData = new EventEmitter<string>();
@@ -26,21 +39,32 @@ export class NgxColorPickerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.color = 'rgb(0, 0,0)';
+  }
+
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    if( changes.open ) {
+      this.open = changes.open.currentValue;
+    }
   }
 
   public ngAfterViewInit() {
 
     this.imageObj = new Image();
+    this.imageObj.src = '/assets/color-picker.png';
     this.imageObj.onload = () => {
       this.create();
     };
-    this.imageObj.src = '/assets/color-picker.png';
+
   }
 
   create() {
-    const padding = 10;
+    console.log('work');
+
+    const padding = 0;
     const canvas: HTMLCanvasElement = this.canvas.nativeElement;
     const context = canvas.getContext('2d');
+    context.drawImage(this.imageObj,0,0);
     let mouseDown = false;
 
     context.strokeStyle = '#444';
@@ -56,8 +80,7 @@ export class NgxColorPickerComponent implements OnInit {
 
     canvas.addEventListener('mousemove', (evt) => {
       const mousePos = this.getMousePos(canvas, evt);
-      const color = undefined;
-
+      // getting user coordinates
       if (
         mouseDown &&
         mousePos !== null &&
@@ -66,30 +89,20 @@ export class NgxColorPickerComponent implements OnInit {
          mousePos.y > padding &&
          mousePos.y < padding + this.imageObj.height
       ) {
-
-        // color picker image is 256x256 and is offset by 10px
-        // from top and bottom
-        const imageData = context.getImageData(padding, padding, this.imageObj.width, this.imageObj.width);
-        const data = imageData.data;
-        const x = mousePos.x - padding;
-        const y = mousePos.y - padding;
-        const red = data[((this.imageObj.width * y) + x) * 4];
-        const green = data[((this.imageObj.width * y) + x) * 4 + 1];
-        const blue = data[((this.imageObj.width * y) + x) * 4 + 2];
-        const color = 'rgb(' + red + ',' + green + ',' + blue + ')';
-        this.rgb = red + ',' + green + ',' + blue;
-        this.rgbData.emit(this.rgb);
-        this.rgbToHex(red, green, blue);
-        if (this.square) {
-          this.drawColorSquare(canvas, color, this.imageObj);
-        }
+        const x = evt.pageX - canvas.offsetLeft;
+        const y = evt.pageY - canvas.offsetTop;
+        // getting image data and RGB values
+        const img_data = context.getImageData(x, y, 1, 1).data;
+        const R = img_data[0];
+        const G = img_data[1];
+        const B = img_data[2];  const rgb = R + ',' + G + ',' + B;
+        // convert RGB to HEX
+        this.hex = this.rgbToHex(R,G,B);
+        // making the color the value of the input
+        this.rgb = `rgb(${R}, ${G}, ${B})`;
+        this.color = this.rgb;
       }
-    }, false);
-
-    context.drawImage(this.imageObj, padding, padding); // , canvas.width + padding, canvas.height + padding);
-    if (this.square) {
-      this.drawColorSquare(canvas, 'white', this.imageObj);
-    }
+    });
   }
 
   getMousePos(canvas, evt) {
@@ -100,30 +113,14 @@ export class NgxColorPickerComponent implements OnInit {
     };
   }
 
-  drawColorSquare(canvas, color, imageObj) {
-    const colorSquareSize = 100;
-    const padding = 10;
-    const context = canvas.getContext('2d');
-    const squareX = (canvas.width - colorSquareSize + imageObj.width) / 2;
-    const squareY = (canvas.height - colorSquareSize) / 2;
-
-    context.beginPath();
-    context.fillStyle = color;
-    context.fillRect(squareX, squareY, colorSquareSize, colorSquareSize);
-    context.strokeRect(squareX, squareY, colorSquareSize, colorSquareSize);
-  }
-
-  rgbToHex(R, G, B) {
-    this.hex = this.toHex(R) + this.toHex(G) + this.toHex(B);
-    this.hexData.emit(this.hex);
+  rgbToHex (R,G,B) {
+    return this.toHex(R)+this.toHex(G)+this.toHex(B)
   }
 
   toHex(n) {
     n = parseInt(n,10);
-    if (isNaN(n)){
-      return '00';
-    };
+    if (isNaN(n)) return "00";
     n = Math.max(0,Math.min(n,255));
-    return '0123456789ABCDEF'.charAt((n-n%16)/16)  + '0123456789ABCDEF'.charAt(n%16);
+    return "0123456789ABCDEF".charAt((n-n%16)/16)  + "0123456789ABCDEF".charAt(n%16);
   }
 }
