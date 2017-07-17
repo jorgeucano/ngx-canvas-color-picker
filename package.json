@@ -1,46 +1,106 @@
 {
   "name": "ngx-canvas-color-picker",
-  "version": "0.0.0",
-  "license": "MIT",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+  "version": "0.0.0-semantically-released",
+  "description": "ngx-canvas-color-picker is a canvas for color pallete picker powered by Angular 2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorgeucano/ngx-canvas-color-picker"
   },
-  "private": true,
   "dependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/http": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "systemjs": "0.20.9",
+    "reflect-metadata": "0.1.10"
   },
   "devDependencies": {
     "@angular/cli": "1.0.1",
     "@angular/compiler-cli": "^4.0.0",
+    "@types/core-js": "^0.9.42",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
-    "jasmine-core": "~2.5.2",
-    "jasmine-spec-reporter": "~3.2.0",
-    "karma": "~1.4.1",
-    "karma-chrome-launcher": "~2.0.0",
-    "karma-cli": "~1.0.1",
-    "karma-jasmine": "~1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
-    "protractor": "~5.1.0",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.0.0",
+    "es6-module-loader": "0.17.11",
+    "http-server": "0.10.0",
+    "husky": "0.13.4",
+    "jasmine-core": "2.5.2",
+    "karma": "1.5.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-coverage": "1.1.1",
+    "karma-jasmine": "1.1.0",
+    "karma-spec-reporter": "0.0.30",
+    "parallelshell": "2.0.0",
+    "remap-istanbul": "0.9.5",
+    "rimraf": "2.6.1",
+    "semantic-release": "6.3.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.2.0",
+    "validate-commit-msg": "2.12.1",
+    "watch": "1.0.2"
+  },
+  "scripts": {
+    "commitmsg": "validate-commit-msg",
+    "prebuild": "npm run clean",
+    "build": "ngc",
+    "clean": "rimraf -rf ./src/**/*.js && rimraf -rf ./src/**/*.d.ts && rimraf -rf ./compiled",
+    "postbuild": "npm publish && semantic-release post",
+    "commit": "git-cz",
+    "coverage": "http-server -c-1 -o -s -p 9875 ./coverage",
+    "start": "parallelshell \"npm run watch:ts\"",
+    "watch:ts": "watch \"npm run build\" src",
+    "parallelshell": "parallelshell",
+    "lint": "tslint '**/*.ts' -e 'node_modules/**/*' -e 'compiled/**/**'  --fix --noUnusedParameters --noUnusedLocals"
+  },
+  "engines": {
+    "node": ">= 4"
+  },
+  "keywords": [
+    "color picker",
+    "canvas",
+    "framework",
+    "angular2",
+    "angular",
+    "javascript"
+  ],
+  "author": "Jorge Cano <jorgeucano@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorgeucano/ngx-canvas-color-picker/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "ci"
+      ],
+      "scope": {
+        "required": true,
+        "allowed": [
+          "*"
+        ],
+        "validate": true,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "",
+      "autoFix": false
+    }
   }
 }
