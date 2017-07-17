@@ -7,8 +7,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, Output,
 })
 export class NgxColorPickerComponent implements OnInit {
 
-  img; rgb; hex;
-  mostrar = false;
+  rgb; hex;
 
   @Input() width: any = 400;
   @Input() height: any = 400;
@@ -39,7 +38,7 @@ export class NgxColorPickerComponent implements OnInit {
   }
 
   create() {
-    const padding = 10;
+    const padding = 0;
     const canvas: HTMLCanvasElement = this.canvas.nativeElement;
     const context = canvas.getContext('2d');
     let mouseDown = false;
@@ -87,8 +86,8 @@ export class NgxColorPickerComponent implements OnInit {
       }
     }, false);
 
-    context.drawImage(this.imageObj, padding, padding);
-    if(this.square){
+    context.drawImage(this.imageObj, padding, padding, canvas.width, canvas.height);
+    if (this.square) {
       this.drawColorSquare(canvas, 'white', this.imageObj);
     }
   }
