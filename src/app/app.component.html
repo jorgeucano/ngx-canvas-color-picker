@@ -2,4 +2,15 @@
   {{title}}
 </h1>
 
-<ngx-canvas-color-picker></ngx-canvas-color-picker>
+<ngx-canvas-color-picker
+  [width]="400"
+  [height]="400"
+  [square]="false"
+  (hexData)="setHex($event)"
+  (rgbData)="setRGB($event)"
+  >
+</ngx-canvas-color-picker>
+
+
+RGB : {{rgb}} <br />
+HEX : {{hex}}

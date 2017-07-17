@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ngx-canvas-color-picker',
@@ -9,6 +9,13 @@ export class NgxColorPickerComponent implements OnInit {
 
   img; rgb; hex;
   mostrar = false;
+
+  @Input() width: any = 400;
+  @Input() height: any = 400;
+  @Input() square: boolean = true;
+
+  @Output() hexData = new EventEmitter<string>();
+  @Output() rgbData = new EventEmitter<string>();
 
   @ViewChild('canvas') public canvas: ElementRef;
   private ctx: CanvasRenderingContext2D;
@@ -29,9 +36,6 @@ export class NgxColorPickerComponent implements OnInit {
       this.create();
     };
     this.imageObj.src = '/assets/color-picker.png';
-
-    // const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
-    // this.ctx = canvasEl.getContext('2d');
   }
 
   create() {
@@ -75,17 +79,19 @@ export class NgxColorPickerComponent implements OnInit {
         const blue = data[((this.imageObj.width * y) + x) * 4 + 2];
         const color = 'rgb(' + red + ',' + green + ',' + blue + ')';
         this.rgb = red + ',' + green + ',' + blue;
-        this.rgbToHex(red, green,blue);
-        this.drawColorSquare(canvas, color, this.imageObj);
+        this.rgbData.emit(this.rgb);
+        this.rgbToHex(red, green, blue);
+        if (this.square) {
+          this.drawColorSquare(canvas, color, this.imageObj);
+        }
       }
     }, false);
 
     context.drawImage(this.imageObj, padding, padding);
-    this.drawColorSquare(canvas, 'white', this.imageObj);
+    if(this.square){
+      this.drawColorSquare(canvas, 'white', this.imageObj);
+    }
   }
-
-
-
 
   getMousePos(canvas, evt) {
     const rect = canvas.getBoundingClientRect();
@@ -110,6 +116,7 @@ export class NgxColorPickerComponent implements OnInit {
 
   rgbToHex(R, G, B) {
     this.hex = this.toHex(R) + this.toHex(G) + this.toHex(B);
+    this.hexData.emit(this.hex);
   }
 
   toHex(n) {
@@ -120,90 +127,4 @@ export class NgxColorPickerComponent implements OnInit {
     n = Math.max(0,Math.min(n,255));
     return '0123456789ABCDEF'.charAt((n-n%16)/16)  + '0123456789ABCDEF'.charAt(n%16);
   }
-
-
-/*
-  public ngAfterViewInit() {
-    const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
-    this.ctx = canvasEl.getContext('2d');
-
-    const radius = canvasEl.width / 2;
-    const toRad = (2 * Math.PI) / 360;
-    const step = 1 / radius;
-
-    this.ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-
-    for(const i = 0; i < 360; i += step) {
-        const rad = i * toRad;
-        this.ctx.strokeStyle = 'hsl(' + i + ', 100%, 50%)';
-        this.ctx.beginPath();
-        this.ctx.moveTo(radius, radius);
-        this.ctx.lineTo(radius + radius * Math.cos(rad), radius + radius * Math.sin(rad));
-        this.ctx.stroke();
-    }
-
-    this.ctx.fillStyle = 'rgb(255, 255, 255)';
-    this.ctx.beginPath();
-    this.ctx.arc(radius, radius, radius * 0.8, 0, Math.PI * 2, true);
-    this.ctx.closePath();
-    this.ctx.fill();
-    const self = this;
-    canvasEl.addEventListener('click', function(e) {
-        const x = e.offsetX || e.clientX - this.offsetLeft;
-        const y = e.offsetY || e.clientY - this.offsetTop;
-
-        const imgData = self.ctx.getImageData(x, y, 1, 1).data;
-        // const selectedColor = new Color(imgData[0], imgData[1], imgData[2]);
-        self.renderMouseCircle(x, y);
-    }, false);
-  }
-
-  renderMouseCircle(x, y) {
-    this.ctx.strokeStyle = 'rgb(255, 255, 255)';
-    this.ctx.lineWidth = 2;
-    this.ctx.beginPath();
-    this.ctx.arc(x, y, 10, 0, Math.PI * 2, true);
-    this.ctx.closePath();
-    this.ctx.stroke();
-  }
-
-  chargeImage() {
-    this.ctx.drawImage(this.img, 0, 0);
-    this.mostrar = true;
-    document.getElementById("canvas_picker").addEventListener("click", this.clickButton);
-  }
-
-
-  rgbToHex(R, G, B) {
-    return this.toHex(R) + this.toHex(G) + this.toHex(B);
-  }
-
-  toHex(n) {
-    n = parseInt(n,10);
-    if (isNaN(n)){
-      return '00';
-    };
-    n = Math.max(0,Math.min(n,255));
-    return '0123456789ABCDEF'.charAt((n-n%16)/16)  + '0123456789ABCDEF'.charAt(n%16);
-  }
-
-  clickButton($event) {
-      // getting user coordinates
-      console.log($event);
-      let x = $event.pageX - $event.offsetX;
-      let y = $event.pageY - $event.offsetY;
-      // getting image data and RGB values
-      let img_data = this.ctx.getImageData(x, y, 1, 1).data;
-      let R = img_data[0];
-      let G = img_data[1];
-      let B = img_data[2];
-      let rgb = R + ',' + G + ',' + B;
-      // convert RGB to HEX
-      console.log(rgb);
-      let hex = this.rgbToHex(R,G,B);
-      // making the color the value of the input
-      this.rgb = rgb;
-      this.hex = '#' + hex;
-  }
-*/
 }

@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+
+  rgb;
+  hex;
+
+  setHex(data: any) {
+    this.hex = data;
+  }
+  setRGB(data: any) {
+    this.rgb = data;
+  }
+
 }
