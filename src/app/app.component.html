@@ -1,9 +1,5 @@
+<h1>
+  {{title}}
+</h1>
 
-<div *ngFor="let color of barColors" class="bar-color" >
-  <div class="bar-color" [style.background-color]="'rgb(' + color + ' ,0,0)'" (click)="log(color);"></div> <br />
-</div>
-
-
-<div class="colorContainer">
-  <div *ngFor="let color of divColor" class="divColor" [style.background-color]="'rgb(' + barColorSelect + ',' + color.g + ', '+ color.b +' )'" (click)="final(barColorSelect, color.g, color.b);"></div>
-</div>
+<ngx-canvas-color-picker></ngx-canvas-color-picker>

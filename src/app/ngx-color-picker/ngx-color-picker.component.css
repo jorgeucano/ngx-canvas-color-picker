@@ -1,0 +1,66 @@
+app-ngx-color-picker{
+    border: 1 px solid black;
+    width: 228px;
+    height: 313px;
+}
+
+.container-color {
+    cursor: pointer;
+    width: 100%;
+    height: 130px;
+    border: none;
+    background-size: 100% 100%;
+}
+
+.colorful-band{
+    display: flex;
+    padding: 4px 8px;
+}
+
+.left-band {
+    position: relative;
+    padding: 16px 8px;
+}
+
+.select-color {
+    width: 40px;
+    height: 40px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -khtml-border-radius: 50%;
+}
+
+.right-band {
+    flex: 1 1 auto;
+    padding: 12px 8px;
+}
+
+.color-band {
+    cursor: pointer;
+    width: 100%;
+    height: 16px;
+    border: none;
+    margin-bottom: 16px;
+    background-size: 100% 100%;
+}
+
+.cursor {
+    cursor: default;
+    position: relative;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -khtml-border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: #222 solid 2px;
+}
+
+.alpha {
+    cursor: pointer;
+    width: 100%;
+    height: 16px;
+    border: none;
+    background-size: 100% 100%;
+}

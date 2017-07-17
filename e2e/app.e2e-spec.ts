@@ -1,10 +1,10 @@
-import { ColorPikerPage } from './app.po';
+import { NgxCanvasColorPickerPage } from './app.po';
 
-describe('color-piker App', () => {
-  let page: ColorPikerPage;
+describe('ngx-canvas-color-picker App', () => {
+  let page: NgxCanvasColorPickerPage;
 
   beforeEach(() => {
-    page = new ColorPikerPage();
+    page = new NgxCanvasColorPickerPage();
   });
 
   it('should display message saying app works', () => {
