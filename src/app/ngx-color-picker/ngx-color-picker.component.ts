@@ -100,6 +100,8 @@ export class NgxColorPickerComponent implements OnInit {
         this.hex = this.rgbToHex(R,G,B);
         // making the color the value of the input
         this.rgb = `rgb(${R}, ${G}, ${B})`;
+        this.hexData.emit(this.hex);
+        this.rgbData.emit(`${R}, ${G}, ${B}`);
         this.color = this.rgb;
       }
     });
