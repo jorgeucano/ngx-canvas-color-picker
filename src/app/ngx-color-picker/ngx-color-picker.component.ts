@@ -38,7 +38,7 @@ export class NgxColorPickerComponent implements OnInit {
   }
 
   create() {
-    const padding = 0;
+    const padding = 10;
     const canvas: HTMLCanvasElement = this.canvas.nativeElement;
     const context = canvas.getContext('2d');
     let mouseDown = false;
@@ -86,7 +86,7 @@ export class NgxColorPickerComponent implements OnInit {
       }
     }, false);
 
-    context.drawImage(this.imageObj, padding, padding, canvas.width, canvas.height);
+    context.drawImage(this.imageObj, padding, padding); // , canvas.width + padding, canvas.height + padding);
     if (this.square) {
       this.drawColorSquare(canvas, 'white', this.imageObj);
     }
