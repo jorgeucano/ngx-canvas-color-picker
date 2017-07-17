@@ -1,6 +1,40 @@
 <div (click)="open=!open" [style.background]="color" class="pick"></div>
 <div [hidden]="open">
-  <canvas #canvas [width]="width" [height]="height" id="canvas_picker"></canvas>
-  <div id="hex">HEX: <input [(ngModel)]="hex" type="text"/></div>
-  <div id="rgb">RGB: <input [(ngModel)]="rgb" type="text"/></div>
+ <canvas #canvas [width]="width" [height]="height" [style.opacity]="opacityCanvas" id="canvas_picker"></canvas>
+ <br />
+ <div class="opacityContainer">
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.0)'" (click)="changeOpacity('0.0')" >
+      <span *ngIf="opacityCanvas === '0.0'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.1)'" (click)="changeOpacity('0.1')" >
+      <span *ngIf="opacityCanvas === '0.1'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.2)'" (click)="changeOpacity('0.2')" >
+      <span *ngIf="opacityCanvas === '0.2'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.3)'" (click)="changeOpacity('0.3')" >
+      <span *ngIf="opacityCanvas === '0.3'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.4)'" (click)="changeOpacity('0.4')" >
+      <span *ngIf="opacityCanvas === '0.4'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.5)'" (click)="changeOpacity('0.5')" >
+      <span *ngIf="opacityCanvas === '0.5'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.6)'" (click)="changeOpacity('0.6')" >
+      <span *ngIf="opacityCanvas === '0.6'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.7)'" (click)="changeOpacity('0.7')" >
+      <span *ngIf="opacityCanvas === '0.7'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.8)'" (click)="changeOpacity('0.8')" >
+      <span *ngIf="opacityCanvas === '0.8'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 0.9)'" (click)="changeOpacity('0.9')" >
+      <span *ngIf="opacityCanvas === '0.9'">^</span>
+    </div>
+    <div class="opacity" [style.background]="'rgba('+rgbLine+', 1)'" (click)="changeOpacity('1.0')" >
+      <span *ngIf="opacityCanvas === '1.0'">^</span>
+    </div>
+  </div>
 </div>

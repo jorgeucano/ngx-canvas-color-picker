@@ -17,7 +17,7 @@ import {
 })
 export class NgxColorPickerComponent implements OnInit {
 
-  rgb; hex; color;
+  rgb; hex; color; rgbLine;
 
   @Input() width: any = 400;
   @Input() height: any = 400;
@@ -31,15 +31,16 @@ export class NgxColorPickerComponent implements OnInit {
 
   @ViewChild('canvas') public canvas: ElementRef;
   private ctx: CanvasRenderingContext2D;
-
   imageObj: any;
+  opacityCanvas: string = '1';
 
   constructor() {
 
   }
 
   ngOnInit() {
-    this.color = 'rgb(0, 0,0)';
+    this.color = 'rgba(0, 0, 0, 1)';
+    this.rgbLine = '0,0,0';
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
@@ -64,7 +65,7 @@ export class NgxColorPickerComponent implements OnInit {
     const padding = 0;
     const canvas: HTMLCanvasElement = this.canvas.nativeElement;
     const context = canvas.getContext('2d');
-    context.drawImage(this.imageObj,0,0);
+    context.drawImage(this.imageObj, 0, 0, this.width, this.height );
     let mouseDown = false;
 
     context.strokeStyle = '#444';
@@ -92,19 +93,24 @@ export class NgxColorPickerComponent implements OnInit {
         const x = evt.pageX - canvas.offsetLeft;
         const y = evt.pageY - canvas.offsetTop;
         // getting image data and RGB values
-        const img_data = context.getImageData(x, y, 1, 1).data;
+        const img_data = context.getImageData(x, y, this.width, this.height).data;
         const R = img_data[0];
         const G = img_data[1];
         const B = img_data[2];  const rgb = R + ',' + G + ',' + B;
         // convert RGB to HEX
-        this.hex = this.rgbToHex(R,G,B);
+        this.hex = this.rgbToHex(R, G, B);
         // making the color the value of the input
-        this.rgb = `rgb(${R}, ${G}, ${B})`;
+        this.rgbLine = `${R}, ${G}, ${B}`;
+        this.rgb = `rgba(${R}, ${G}, ${B}, ${this.opacityCanvas})`;
         this.hexData.emit(this.hex);
-        this.rgbData.emit(`${R}, ${G}, ${B}`);
+        this.rgbData.emit(`${R}, ${G}, ${B}, ${this.opacityCanvas}`);
         this.color = this.rgb;
       }
     });
+  }
+
+  changeOpacity(opacity) {
+    this.opacityCanvas = opacity;
   }
 
   getMousePos(canvas, evt) {
@@ -115,8 +121,8 @@ export class NgxColorPickerComponent implements OnInit {
     };
   }
 
-  rgbToHex (R,G,B) {
-    return this.toHex(R)+this.toHex(G)+this.toHex(B)
+  rgbToHex (R, G, B) {
+    return this.toHex(R) + this.toHex(G) + this.toHex(B);
   }
 
   toHex(n) {

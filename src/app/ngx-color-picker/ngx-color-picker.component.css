@@ -3,6 +3,16 @@ canvas {
 }
 
 .pick {
+  width: 25px;
+  height: 25px;
+}
+
+.opacity {
   width: 10px;
-  height: 10px;
+  height: 20px;
+  float:left;
+}
+
+.opacityContainer{
+  height: 25px;
 }
