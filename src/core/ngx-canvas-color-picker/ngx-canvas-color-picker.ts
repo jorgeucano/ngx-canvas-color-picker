@@ -98,7 +98,7 @@ export class NgxCanvasColorPickerComponent implements OnInit {
   public ngAfterViewInit() {
 
     this.imageObj = new Image();
-    this.imageObj.src = '/assets/color-picker.png';
+    this.imageObj.src = './assets/color-picker.png';
     this.imageObj.onload = () => {
       this.create();
     };

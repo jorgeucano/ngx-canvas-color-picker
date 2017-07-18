@@ -46,13 +46,13 @@
     "prebuild": "npm run clean",
     "build": "ngc",
     "clean": "rimraf -rf ./src/**/*.js && rimraf -rf ./src/**/*.d.ts && rimraf -rf ./compiled",
-    "postbuild": "semantic-release pre && npm publish && semantic-release post",
+    "postbuild": "",
     "commit": "git-cz",
     "coverage": "http-server -c-1 -o -s -p 9875 ./coverage",
     "start": "parallelshell \"npm run watch:ts\"",
     "watch:ts": "watch \"npm run build\" src",
     "parallelshell": "parallelshell",
-    "lint": "tslint '**/*.ts' -e 'node_modules/**/*' -e 'compiled/**/**'  --fix --noUnusedParameters --noUnusedLocals"
+    "lint": "tslint './src/**/*.ts' -e 'node_modules/**/*' -e 'compiled/**/**'  --fix --noUnusedParameters --noUnusedLocals"
   },
   "engines": {
     "node": ">= 4"
