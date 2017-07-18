@@ -4,7 +4,7 @@
   "description": "ngx-canvas-color-picker is a canvas for color pallete picker powered by Angular 2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jorgeucano/ngx-canvas-color-picker.git"
+    "url": "https://github.com/jorgeucano/ngx-canvas-color-picker.git"
   },
   "dependencies": {
     "core-js": "^2.4.1",
