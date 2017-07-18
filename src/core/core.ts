@@ -16,5 +16,5 @@ export function coreDirectives() {
     imports: [ CommonModule, FormsModule ]
 })
 
-export class NgxCanvasColorPickerCore {
+export class NgxCanvasColorPickerModule {
 }

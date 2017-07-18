@@ -46,7 +46,7 @@
     "prebuild": "npm run clean",
     "build": "ngc",
     "clean": "rimraf -rf ./src/**/*.js && rimraf -rf ./src/**/*.d.ts && rimraf -rf ./compiled",
-    "postbuild": "npm publish && semantic-release post",
+    "postbuild": "semantic-release pre && npm publish && semantic-release post",
     "commit": "git-cz",
     "coverage": "http-server -c-1 -o -s -p 9875 ./coverage",
     "start": "parallelshell \"npm run watch:ts\"",
