@@ -80,7 +80,7 @@
     "url": "https://github.com/jorgeucano/ngx-canvas-color-picker/issues"
   },
   "release": {
-    "debug": true,
+    "debug": false,
     "type": "minor",
     "version": "0.0.0"
   },
