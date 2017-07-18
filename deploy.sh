@@ -10,21 +10,3 @@ then
 fi
 
 rev=$(git rev-parse --short HEAD)
-
-cd docs/_book
-
-git init
-git config user.name "Jorge Cano"
-git config user.email "jorgeucano@gmail.com"
-
-git remote add upstream "https://$GH_TOKEN@github.com/jorgeucano/ngx-canvas-color-picker.git"
-git fetch upstream
-git reset upstream/gh-pages
-
-# echo "your-custom-domain.com" > CNAME
-
-touch .
-
-git add -A .
-git commit -m "ci(GH-Pages): Rebuild pages at ${rev}"
-git push -q upstream HEAD:gh-pages
