@@ -45,8 +45,10 @@
     "commitmsg": "validate-commit-msg",
     "prebuild": "npm run clean",
     "build": "ngc",
+    "postbuild": "semantic-release pre && npm publish && semantic-release post",
+    "build:travis": "ngc",
+    "postbuild:travis": "semantic-release pre && npm publish && semantic-release post",
     "clean": "rimraf -rf ./src/**/*.js && rimraf -rf ./src/**/*.d.ts && rimraf -rf ./compiled",
-    "postbuild": "",
     "commit": "git-cz",
     "coverage": "http-server -c-1 -o -s -p 9875 ./coverage",
     "start": "parallelshell \"npm run watch:ts\"",
@@ -55,7 +57,7 @@
     "lint": "tslint './src/**/*.ts' -e 'node_modules/**/*' -e 'compiled/**/**'  --fix --noUnusedParameters --noUnusedLocals"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 7"
   },
   "keywords": [
     "color picker",
