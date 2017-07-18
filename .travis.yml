@@ -16,6 +16,7 @@ before_install:
 before_script:
   - npm prune
 script:
+  - npm i -g
   - npm run build:travis
   - cd docs
   - npm install

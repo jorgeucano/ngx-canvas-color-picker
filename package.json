@@ -72,6 +72,11 @@
   "bugs": {
     "url": "https://github.com/jorgeucano/ngx-canvas-color-picker/issues"
   },
+  "release": {
+    "debug": true,
+    "type": "minor",
+     "version": "0.0.0"
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
