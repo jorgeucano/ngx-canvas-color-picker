@@ -4,7 +4,7 @@
   "description": "ngx-canvas-color-picker is a canvas for color pallete picker powered by Angular 2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jorgeucano/ngx-canvas-color-picker"
+    "url": "https://github.com/jorgeucano/ngx-canvas-color-picker.git"
   },
   "dependencies": {
     "core-js": "^2.4.1",
@@ -14,8 +14,15 @@
     "reflect-metadata": "0.1.10"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.1",
+    "@angular/animations": "^4.3.0",
+    "@angular/common": "^4.3.0",
+    "@angular/compiler": "^4.3.0",
     "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.3.0",
+    "@angular/forms": "^4.3.0",
+    "@angular/platform-browser": "^4.3.0",
+    "@angular/platform-browser-dynamic": "^4.3.0",
+    "@angular/platform-server": "^4.3.0",
     "@types/core-js": "^0.9.42",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
@@ -72,6 +79,11 @@
   "bugs": {
     "url": "https://github.com/jorgeucano/ngx-canvas-color-picker/issues"
   },
+  "release": {
+    "debug": false,
+    "type": "minor",
+    "version": "0.0.0"
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
@@ -104,5 +116,7 @@
       "helpMessage": "",
       "autoFix": false
     }
-  }
+  },
+  "homepage": "https://github.com/jorgeucano/ngx-canvas-color-picker#readme",
+  "main": "core.js"
 }
